@@ -1,14 +1,17 @@
+/* Reset default browser styles and set box-sizing */
 *,*::after,*::before{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Set base font size and family */
 html{
     font-size: 18px;
     font-family: Arial, Helvetica, sans-serif;
 }
 
+/* Center the calculator on the page */
 body{
     position: absolute;
     top: 50%;
@@ -16,6 +19,7 @@ body{
     transform: translate(-50%, -50%);
 }
 
+/* Style the calculator header with gradient text effect */
 .header{
     text-align: center;
     margin-bottom: 10px;
@@ -26,6 +30,7 @@ body{
     background-image: linear-gradient(90deg, blue  0%, violet 40%, blueviolet  60%, purple 100%);
 }
 
+/* Main calculator container styling */
 .calculator{
     width: 400px;
     height: fit-content;
@@ -36,6 +41,7 @@ body{
     flex-direction: column;
 }
 
+/* Grid container for calculator buttons */
 .buttons--container{
     width: 100%;
     display: grid;
@@ -48,6 +54,7 @@ body{
     padding: 10px;
 }
 
+/* Style for all calculator buttons */
 .buttons--container button{
     cursor: pointer;
     padding: .75rem;
@@ -58,10 +65,12 @@ body{
     transition: all .3s ease-in-out;
 }
 
+/* Hover effect for buttons */
 .buttons--container button:hover{
     background-color: beige;    
 }
 
+/* Grid positioning for specific buttons */
 #_0 {
     grid-column: 2;
 }
@@ -86,6 +95,7 @@ body{
     grid-row: 2 ;
 }
 
+/* Position operation buttons in the last column */
 #_equal, #_comma, #_plus, #_0{
     grid-row: 4;
 }
@@ -94,6 +104,7 @@ body{
     grid-column:4;
 }
 
+/* Style for the calculator result display */
 div[class="result"]{
     grid-column-start: 1;
     grid-column-end: span 4;

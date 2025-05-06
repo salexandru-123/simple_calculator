@@ -1,16 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Meta tags for proper character encoding and responsive viewport -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Link to external stylesheet -->
     <link rel="stylesheet" href="style.css">
     <title>My Calculator app</title>
 </head>
 <body lang="en">
+    <!-- Main header of the calculator -->
     <h1 class="header">Calculator</h1>
+    <!-- Main calculator container -->
     <div class="calculator">
+        <!-- Display area for calculator results -->
         <div class="result">...</div>
+        <!-- Grid container for calculator buttons -->
         <div class="buttons--container">
+            <!-- Numeric buttons (0-9) -->
             <button id="_0">0</button>
             <button id="_1">1</button>
             <button id="_2">2</button>
@@ -21,7 +28,9 @@
             <button id="_7">7</button>
             <button id="_8">8</button>
             <button id="_9">9</button>
+            <!-- Decimal point button -->
             <button id="_comma">.</button>
+            <!-- Operation buttons -->
             <button id="_equal">=</button>
             <button id="_plus">+</button>
             <button id="_minus">-</button>
@@ -30,5 +39,6 @@
         </div>
     </div>
 </body>
+<!-- Load JavaScript file with defer to ensure DOM is loaded first -->
 <script defer src="script.js"></script>
 </html>
