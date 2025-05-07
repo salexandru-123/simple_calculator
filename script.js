@@ -24,7 +24,7 @@ const calculator = function(e){
         return;
     }
 
-    if (value === 'Undo') {
+    if (value === '⤶') {
         if (resultLabel.textContent.length > 1) {
             resultLabel.textContent = resultLabel.textContent.slice(0, -1);
         } else {
