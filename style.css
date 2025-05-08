@@ -46,7 +46,7 @@ body{
     width: 100%;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr ;
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
     overflow: hidden;
     border-radius: 0 0 20px 20px;
     border: 1px solid black;
@@ -102,6 +102,16 @@ body{
 
 #_mul, #_division, #_plus, #_minus{
     grid-column:4;
+}
+
+#_cancel {
+    grid-column: 1;
+    grid-row: 5;
+}
+
+#_undo {
+    grid-column: 2;
+    grid-row: 5;
 }
 
 /* Style for the calculator result display */

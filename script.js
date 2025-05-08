@@ -17,6 +17,23 @@ let operation;
 const calculator = function(e){
     const value = e.target.textContent;
     
+    if (value === 'C') {
+        number = total = 0;
+        operation = null;
+        resultLabel.textContent = '0';
+        return;
+    }
+
+    if (value === '⤶') {
+        if (resultLabel.textContent.length > 1) {
+            resultLabel.textContent = resultLabel.textContent.slice(0, -1);
+        } else {
+            resultLabel.textContent = '0';
+        }
+        number = parseFloat(resultLabel.textContent) || 0;
+        return;
+    }
+
     // Handle display reset and decimal point logic
     if(value != '.'){
         if(resultLabel.textContent === '0' || operation === '=') resultLabel.textContent = '';
