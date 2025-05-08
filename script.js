@@ -32,24 +32,34 @@ const calculator = function(e) {
         number = Number.parseFloat(resultLabel.textContent);
     }
 
+    // Handle parentheses input
+    if (value === '(' || value === ')') {
+        resultLabel.textContent += value;
+        return;
+    }
+
     if(operations.includes(value)) {
         if(value === '.') {
             if(!String(resultLabel.textContent).includes('.'))
                 resultLabel.textContent = resultLabel.textContent + '.';
         }
         else if(value === '=') {
-            if(operation === '+') total += number;
-            if(operation === '-') total -= number;
-            if(operation === '/') total /= number;
-            if(operation === 'x') total *= number;
-            resultLabel.textContent = String(Number.parseFloat(total.toFixed(8)));
+            try {
+                // Replace 'x' with '*' for multiplication
+                let expr = resultLabel.textContent.replace(/x/g, '*');
+                // Evaluate the expression (including parentheses)
+                let evalResult = eval(expr);
+                resultLabel.textContent = String(Number.parseFloat(evalResult.toFixed(8)));
+                number = evalResult;
+                total = evalResult;
+            } catch (e) {
+                resultLabel.textContent = 'Error';
+            }
             operation = value;
-            number = total;
         }
         else {
             operation = value;
-            resultLabel.textContent = '0';
-            total = number;
+            resultLabel.textContent = resultLabel.textContent + value;
         }
     }
 
