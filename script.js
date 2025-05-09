@@ -2,21 +2,29 @@
 const resultLabel = document.querySelector('.result');
 const btnsContainer = document.querySelector('.buttons--container');
 
-// Initialize calculator display
-resultLabel.textContent = 0;
+const scientificButtons = document.querySelector('.scientific-buttons');
+const modeToggle = document.getElementById('mode-toggle');
 
-// Define valid input values and operations
-const values = ['0','1','2','3','4','5','6','7','8','9']
-const operations = ['+','-','x','/','=','.']
+resultLabel.textContent = '0';
+const values = ['0','1','2','3','4','5','6','7','8','9'];
+const operations = ['+','-','x','/','=','.'];
+const scientificOps = ['√', 'x²', 'sin', 'cos', 'tan', 'log', 'π', '(', ')'];
+let number = 0.0;
+let total = 0.0;
+let operation = null;
+let isScientificMode = false;
 
-// Initialize calculator state variables
-let number = total = 0.0;
-let operation;
+// Toggle scientific mode
+modeToggle.addEventListener('click', () => {
+    isScientificMode = !isScientificMode;
+    scientificButtons.classList.toggle('hidden');
+    modeToggle.textContent = isScientificMode ? 'Simple Mode' : 'Scientific Mode';
+});
 
-// Main calculator function that handles all button clicks
-const calculator = function(e){
+const calculator = function(e) {
     const value = e.target.textContent;
     
+  // Handle clear and backspace operations
     if (value === 'C') {
         number = total = 0;
         operation = null;
@@ -34,49 +42,84 @@ const calculator = function(e){
         return;
     }
 
-    // Handle display reset and decimal point logic
-    if(value != '.'){
+    if(value !== '.') {
         if(resultLabel.textContent === '0' || operation === '=') resultLabel.textContent = '';
         if(operation === '=') operation = null;
     }
-    
-    // Handle numeric input
-    if(values.includes(value)){
-        resultLabel.textContent = resultLabel.textContent + value 
-        number = Number.parseFloat(resultLabel.textContent)
-    }
-    
-    // Handle operations (+, -, x, /, =, .)
-    if(operations.includes(value)){
-        // Handle decimal point input
-        if(value === '.' ) {
-            if(!String(resultLabel.textContent).includes('.'))
-            resultLabel.textContent = resultLabel.textContent+'.';
-        }
-        // Handle equals operation and perform calculation
-        else if(value === '='){
-            if(operation === '+') total += number
-            if(operation === '-') total -= number
-            if(operation === '/') total /= number
-            if(operation === 'x') total *= number
-            resultLabel.textContent = String(Number.parseFloat(total)).padEnd(4);
-            operation = value
-            number = total
-        }
-        // Handle other operations (+, -, x, /)
-        else{
-            operation = value;
-            resultLabel.textContent = '0';
-            total = number;
-        }
-    }
-    
-    // Debug logging
-    console.log('Operation:'+operation);
-    console.log('Value:'+value);
-    console.log('Number:'+number)
-    console.log('total:'+total);
-}
 
-// Add click event listener to the calculator buttons container
-btnsContainer.addEventListener('click', calculator)
+    if(values.includes(value)) {
+        resultLabel.textContent = resultLabel.textContent + value;
+        number = Number.parseFloat(resultLabel.textContent);
+    }
+
+    // Handle parentheses input
+    if (value === '(' || value === ')') {
+        resultLabel.textContent += value;
+        return;
+    }
+
+    if(operations.includes(value)) {
+        if(value === '.') {
+            if(!String(resultLabel.textContent).includes('.'))
+                resultLabel.textContent = resultLabel.textContent + '.';
+        }
+        else if(value === '=') {
+            try {
+                // Replace 'x' with '*' for multiplication
+                let expr = resultLabel.textContent.replace(/x/g, '*');
+                // Add implicit multiplication for expressions like 5(3+5)
+                expr = expr.replace(/(\d+|\))(?=\()/g, '$1*');
+                // Check for empty parentheses
+                if (expr.includes('()')) {
+                    throw new Error('Empty parentheses not allowed');
+                }
+                // Evaluate the expression (including parentheses)
+                let evalResult = eval(expr);
+                resultLabel.textContent = String(Number.parseFloat(evalResult.toFixed(8)));
+                number = evalResult;
+                total = evalResult;
+            } catch (e) {
+                resultLabel.textContent = 'Error';
+            }
+        }
+        else {
+            operation = value;
+            resultLabel.textContent = resultLabel.textContent + value;
+        }
+    }
+    if(scientificOps.includes(value)) {
+        switch(value) {
+            case '√':
+                number = Math.sqrt(parseFloat(resultLabel.textContent));
+                resultLabel.textContent = String(number);
+                break;
+            case 'x²':
+                number = Math.pow(parseFloat(resultLabel.textContent), 2);
+                resultLabel.textContent = String(number);
+                break;
+            case 'sin':
+                number = Math.sin(parseFloat(resultLabel.textContent) * Math.PI / 180);
+                resultLabel.textContent = String(number.toFixed(8));
+                break;
+            case 'cos':
+                number = Math.cos(parseFloat(resultLabel.textContent) * Math.PI / 180);
+                resultLabel.textContent = String(number.toFixed(8));
+                break;
+            case 'tan':
+                number = Math.tan(parseFloat(resultLabel.textContent) * Math.PI / 180);
+                resultLabel.textContent = String(number.toFixed(8));
+                break;
+            case 'log':
+                number = Math.log10(parseFloat(resultLabel.textContent));
+                resultLabel.textContent = String(number.toFixed(8));
+                break;
+            case 'π':
+                resultLabel.textContent = String(Math.PI);
+                number = Math.PI;
+                break;
+        }
+    }
+};
+
+btnsContainer.addEventListener('click', calculator);
+scientificButtons.addEventListener('click', calculator);

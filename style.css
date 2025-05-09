@@ -8,101 +8,149 @@
 /* Set base font size and family */
 html{
     font-size: 18px;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: Arial, sans-serif;
 }
 
-/* Center the calculator on the page */
-body{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+/* Center the calculator on the page with flex layout */
+body {
+    margin: 0;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background-color: #f0f0f0;
+    font-family: Arial, sans-serif;
+    padding: 20px;
 }
 
 /* Style the calculator header with gradient text effect */
-.header{
+.header {
+
     text-align: center;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
     font-family: monospace;
-    font-size: 4rem;
+    font-size: 3rem;
     color: transparent;
     background-clip: text;
-    background-image: linear-gradient(90deg, blue  0%, violet 40%, blueviolet  60%, purple 100%);
+    -webkit-background-clip: text;
+    background-image: linear-gradient(90deg, blue 0%, violet 40%, blueviolet 60%, purple 100%);
 }
 
 /* Main calculator container styling */
+
 .calculator{
     width: 400px;
     height: fit-content;
     border: 1px solid black;
-    border-radius: 20px;
-    box-shadow: inset 1px 2px 12px;
-    display: flex;
-    flex-direction: column;
+
+
+}
+.mode-switch {
+    text-align: right;
+    margin-bottom: 10px;
 }
 
-/* Grid container for calculator buttons */
-.buttons--container{
-    width: 100%;
+#mode-toggle {
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+#mode-toggle:hover {
+    background-color: #45a049;
+}
+
+.result {
+    background-color: #f8f9fa;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 10px;
+    text-align: right;
+    font-size: 24px;
+    min-height: 60px;
+    border: 1px solid #ddd;
+    box-shadow: inset 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+/* Grid containers for buttons */
+.buttons--container, .scientific-buttons {
     display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-    overflow: hidden;
-    border-radius: 0 0 20px 20px;
-    border: 1px solid black;
-    gap: 5px;
+    gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
     padding: 10px;
 }
 
-/* Style for all calculator buttons */
-.buttons--container button{
-    cursor: pointer;
-    padding: .75rem;
-    text-align: center;
-    background-color: #aaa;    
-    border: 1px solid black;
+.scientific-buttons {
+    margin-top: 10px;
+    grid-template-columns: repeat(3, 1fr);
+    border-top: 1px solid #eee;
+    padding-top: 15px;
+
+}
+
+.hidden {
+    display: none;
+}
+
+/* Button styling */
+button {
+    padding: 15px;
+    font-size: 18px;
+    border: none;
+    background-color: #e9ecef;
     border-radius: 10px;
-    transition: all .3s ease-in-out;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
-/* Hover effect for buttons */
-.buttons--container button:hover{
-    background-color: beige;    
+button:hover {
+    background-color: #dee2e6;
+    transform: translateY(-1px);
 }
 
-/* Grid positioning for specific buttons */
-#_0 {
-    grid-column: 2;
+/* Special button styling */
+#_equal {
+    background-color: #007bff;
+    color: white;
 }
 
-#_equal{
-    grid-column: 3;
+#_equal:hover {
+    background-color: #0056b3;
 }
 
-#_comma{
-    grid-column: 1;
+/* Operation buttons */
+#_plus, #_minus, #_mul, #_division {
+    background-color: #ffc107;
 }
 
-#_minus{
-    grid-row: 3;
+#_plus:hover, #_minus:hover, #_mul:hover, #_division:hover {
+    background-color: #e0a800;
+  }
+
+/* Scientific operation buttons */
+.scientific-buttons button {
+    background-color: #6c757d;
+    color: white;
 }
 
-#_mul{
-    grid-row:1;
+.scientific-buttons button:hover {
+    background-color: #5a6268;
 }
 
-#_division{
-    grid-row: 2 ;
-}
-
-/* Position operation buttons in the last column */
-#_equal, #_comma, #_plus, #_0{
-    grid-row: 4;
-}
-
-#_mul, #_division, #_plus, #_minus{
-    grid-column:4;
-}
+/* Grid positioning */
+#_0 { grid-column: 2; }
+#_comma { grid-column: 1; }
+#_minus { grid-row: 3; }
+#_mul { grid-row: 1; }
+#_division { grid-row: 2; }
+#_equal, #_comma, #_plus, #_0 { grid-row: 4; }
+#_mul, #_division, #_plus, #_minus { grid-column: 4; }
 
 #_cancel {
     grid-column: 1;

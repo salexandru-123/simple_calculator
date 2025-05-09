@@ -15,9 +15,17 @@
     <h1 class="header">Calculator</h1>
     <!-- Main calculator container -->
     <div class="calculator">
+
+        <!-- Scientific mode toggle switch -->
+        <div class="mode-switch">
+            <button id="mode-toggle">Scientific Mode</button>
+        </div>
+        
         <!-- Display area for calculator results -->
-        <div class="result">...</div>
-        <!-- Grid container for calculator buttons -->
+        <div class="result">0</div>
+        
+        <!-- Grid container for basic calculator buttons -->
+
         <div class="buttons--container">
             <!-- Numeric buttons (0-9) -->
             <button id="_0">0</button>
@@ -41,6 +49,19 @@
             <!-- Cancel and Undo buttons -->
             <button id="_cancel">C</button>
             <button id="_undo">⤶</button>
+        </div>
+
+        <!-- Grid container for scientific calculator buttons -->
+        <div class="scientific-buttons hidden">
+            <button id="_sqrt">√</button>
+            <button id="_square">x²</button>
+            <button id="_sin">sin</button>
+            <button id="_cos">cos</button>
+            <button id="_tan">tan</button>
+            <button id="_log">log</button>
+            <button id="_pi">π</button>
+            <button id="_left_paren">(</button>
+            <button id="_right_paren">)</button>
         </div>
     </div>
 </body>
