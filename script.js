@@ -22,6 +22,24 @@ modeToggle.addEventListener('click', () => {
 const calculator = function(e) {
     const value = e.target.textContent;
     
+    // Handle clear and backspace operations
+    if (value === 'C') {
+        number = total = 0;
+        operation = null;
+        resultLabel.textContent = '0';
+        return;
+    }
+
+    if (value === '⤶') {
+        if (resultLabel.textContent.length > 1) {
+            resultLabel.textContent = resultLabel.textContent.slice(0, -1);
+        } else {
+            resultLabel.textContent = '0';
+        }
+        number = parseFloat(resultLabel.textContent) || 0;
+        return;
+    }
+
     if(value !== '.') {
         if(resultLabel.textContent === '0' || operation === '=') resultLabel.textContent = '';
         if(operation === '=') operation = null;
@@ -47,6 +65,12 @@ const calculator = function(e) {
             try {
                 // Replace 'x' with '*' for multiplication
                 let expr = resultLabel.textContent.replace(/x/g, '*');
+                // Add implicit multiplication for expressions like 5(3+5)
+                expr = expr.replace(/(\d+|\))(?=\()/g, '$1*');
+                // Check for empty parentheses
+                if (expr.includes('()')) {
+                    throw new Error('Empty parentheses not allowed');
+                }
                 // Evaluate the expression (including parentheses)
                 let evalResult = eval(expr);
                 resultLabel.textContent = String(Number.parseFloat(evalResult.toFixed(8)));

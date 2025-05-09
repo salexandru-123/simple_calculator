@@ -9,10 +9,15 @@
 <body lang="en">
     <h1 class="header">Calculator</h1>
     <div class="calculator">
+        <!-- Scientific mode toggle switch -->
         <div class="mode-switch">
             <button id="mode-toggle">Scientific Mode</button>
         </div>
-        <div class="result">...</div>
+        
+        <!-- Display area for calculator results -->
+        <div class="result">0</div>
+        
+        <!-- Grid container for basic calculator buttons -->
         <div class="buttons--container">
             <button id="_0">0</button>
             <button id="_1">1</button>
@@ -31,6 +36,8 @@
             <button id="_mul">x</button>
             <button id="_division">/</button>
         </div>
+
+        <!-- Grid container for scientific calculator buttons -->
         <div class="scientific-buttons hidden">
             <button id="_sqrt">√</button>
             <button id="_square">x²</button>
@@ -43,6 +50,6 @@
             <button id="_right_paren">)</button>
         </div>
     </div>
+    <script defer src="script.js"></script>
 </body>
-<script defer src="script.js"></script>
 </html>
