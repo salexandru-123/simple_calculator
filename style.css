@@ -1,9 +1,11 @@
+/* Reset default browser styles and set box-sizing */
 *,*::after,*::before{
     margin: 0;
     padding: 0;
     box-sizing: border-box;
 }
 
+/* Set base font size and family */
 html{
     font-size: 18px;
     font-family: Arial, sans-serif;
@@ -24,6 +26,7 @@ body {
 
 /* Style the calculator header with gradient text effect */
 .header {
+
     text-align: center;
     margin-bottom: 20px;
     font-family: monospace;
@@ -35,15 +38,14 @@ body {
 }
 
 /* Main calculator container styling */
-.calculator {
-    background-color: #fff;
-    border-radius: 20px;
-    padding: 20px;
-    box-shadow: 0 0 20px rgba(0, 0, 0, 0.15);
-    width: 350px;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-}
 
+.calculator{
+    width: 400px;
+    height: fit-content;
+    border: 1px solid black;
+
+
+}
 .mode-switch {
     text-align: right;
     margin-bottom: 10px;
@@ -55,6 +57,7 @@ body {
     border: none;
     padding: 8px 16px;
     border-radius: 5px;
+
     cursor: pointer;
     transition: background-color 0.3s;
 }
@@ -88,6 +91,7 @@ body {
     grid-template-columns: repeat(3, 1fr);
     border-top: 1px solid #eee;
     padding-top: 15px;
+
 }
 
 .hidden {
@@ -127,7 +131,7 @@ button:hover {
 
 #_plus:hover, #_minus:hover, #_mul:hover, #_division:hover {
     background-color: #e0a800;
-}
+  }
 
 /* Scientific operation buttons */
 .scientific-buttons button {
@@ -148,6 +152,17 @@ button:hover {
 #_equal, #_comma, #_plus, #_0 { grid-row: 4; }
 #_mul, #_division, #_plus, #_minus { grid-column: 4; }
 
+#_cancel {
+    grid-column: 1;
+    grid-row: 5;
+}
+
+#_undo {
+    grid-column: 2;
+    grid-row: 5;
+}
+
+/* Style for the calculator result display */
 div[class="result"]{
     grid-column-start: 1;
     grid-column-end: span 4;

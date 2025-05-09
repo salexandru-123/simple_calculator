@@ -1,5 +1,7 @@
+// Get references to DOM elements
 const resultLabel = document.querySelector('.result');
 const btnsContainer = document.querySelector('.buttons--container');
+
 const scientificButtons = document.querySelector('.scientific-buttons');
 const modeToggle = document.getElementById('mode-toggle');
 
@@ -22,7 +24,7 @@ modeToggle.addEventListener('click', () => {
 const calculator = function(e) {
     const value = e.target.textContent;
     
-    // Handle clear and backspace operations
+  // Handle clear and backspace operations
     if (value === 'C') {
         number = total = 0;
         operation = null;
@@ -79,14 +81,12 @@ const calculator = function(e) {
             } catch (e) {
                 resultLabel.textContent = 'Error';
             }
-            operation = value;
         }
         else {
             operation = value;
             resultLabel.textContent = resultLabel.textContent + value;
         }
     }
-
     if(scientificOps.includes(value)) {
         switch(value) {
             case '√':
